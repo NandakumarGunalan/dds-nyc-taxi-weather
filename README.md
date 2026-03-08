@@ -125,3 +125,22 @@ Data ingestion handled via:
 
 
 
+
+## Daily Taxi Summary Aggregation
+
+We created a MongoDB aggregation pipeline to summarize 2022 NYC taxi trips at the daily level.
+
+This pipeline:
+- filters taxi trips to 2022 only
+- derives `trip_date` from `tpep_pickup_datetime`
+- computes trip duration in minutes
+- aggregates daily metrics:
+  - `total_trips`
+  - `avg_trip_distance`
+  - `avg_fare_amount`
+  - `avg_total_amount`
+  - `avg_passenger_count`
+  - `avg_trip_duration_minutes`
+- writes the result to a new collection: `daily_taxi_summary`
+
+This collection will be used in the next step to join with `weather_daily` and create the integrated analytics dataset.
